@@ -22,6 +22,7 @@ ret=$?
 if [ $ret -ne 0 ]; then
      #Handle failure
      printf "Error running pyinstaller"
+     exit 1
 fi
 
 ## deactivate venv
