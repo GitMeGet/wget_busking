@@ -2,6 +2,7 @@ import difflib
 import wget
 import os
 import sys
+import time
 
 url = 'https://www.nac.gov.sg/whatwedo/engagement/artsforall/busking.html'
 
@@ -27,3 +28,5 @@ else:
     d = difflib.Differ()
     result = d.compare(html1_str, html2_str)
     sys.stdout.writelines(result)
+
+time.sleep(5)
