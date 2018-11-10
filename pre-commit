@@ -1,0 +1,28 @@
+#!/bin/sh
+# The hook should exit with non-zero status after issuing an appropriate message if
+# it wants to stop the commit
+#
+# To enable this hook, rename this file to "pre-commit".
+
+parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+printf "$parent_path"
+
+## cd to root dir
+cd "$parent_path"
+cd ../../
+
+## activate venv from /.git/hooks dir
+source ./Scripts/activate
+
+## run pyinstaller
+pyinstaller wget_busking.py --onefile
+
+## check return code, carry on with commit
+ret=$?
+if [ $ret -ne 0 ]; then
+     #Handle failure
+     printf "Error running pyinstaller"
+fi
+
+## deactivate venv
+deactivate
